@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">WAO Azurite Planner</string>
+    <string name="azurite_goal_label">Azurite Goal - %1$s</string>
+    <string name="duration_remaining">%1$s days %2$s hours remaining</string>
+    <string name="entry_azurite_goal">Azurite goal: %1$s</string>
+    <string name="entry_total_azurite">Current azurite: %1$s</string>
+    <string name="entry_hourly_production">Hourly production: %1$s</string>
+    <string name="entry_royal_challenge">Royal challenge reward: %1$s</string>
+    <string name="entry_current_azurite_hint">Enter current azurite amount</string>
+    <string name="entry_azurite_goal_hint">Enter azurite goal</string>
+    <string name="entry_base_production_hint">Enter hourly azurite production</string>
+    <string name="entry_rc_amount_hint">Enter royal challenge reward"</string>
+    <string name="entry_base_production_default">8</string>
+    <string name="entry_rc_amount_default">50</string>
+    <string name="entry_azurite_default">0</string>
+    <string name="empty_list">No entries</string>
+
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_chart">Chart</string>
+    <string name="menu_list">List</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_about">About</string>
+    <string name="save">Save</string>
+</resources>

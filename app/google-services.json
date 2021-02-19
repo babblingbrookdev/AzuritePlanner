@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "252920614632",
+    "project_id": "azurite-planner",
+    "storage_bucket": "azurite-planner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252920614632:android:b6c204750391323d0f035d",
+        "android_client_info": {
+          "package_name": "com.babblingbrookdev.azuriteplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252920614632-npiob5d7h0akk465j7nh1qk9uk6eg635.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8OixsNKeaCaaNaEi0HBkHGCBOg0StEGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252920614632-npiob5d7h0akk465j7nh1qk9uk6eg635.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
