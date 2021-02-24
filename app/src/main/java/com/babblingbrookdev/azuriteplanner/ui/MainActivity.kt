@@ -10,7 +10,9 @@ import com.babblingbrookdev.azuriteplanner.databinding.ActivityMainBinding
 import com.babblingbrookdev.azuriteplanner.ui.chart.ChartFragment
 import com.babblingbrookdev.azuriteplanner.ui.list.ListFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), FragmentListener {
 
     private lateinit var binding: ActivityMainBinding

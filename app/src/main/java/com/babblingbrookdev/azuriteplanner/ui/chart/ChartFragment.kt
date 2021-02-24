@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.babblingbrookdev.azuriteplanner.R
 import com.babblingbrookdev.azuriteplanner.databinding.FragmentChartBinding
@@ -22,18 +23,15 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import dagger.android.support.AndroidSupportInjection
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.RuntimeException
 import java.util.*
-import javax.inject.Inject
 import kotlin.math.floor
 
+@AndroidEntryPoint
+class ChartFragment : Fragment() {
 
-class ChartFragment : Fragment(R.layout.fragment_chart) {
-
-    @Inject
-    lateinit var viewModel: ChartViewModel
+    private val viewModel: ChartViewModel by viewModels()
     private var _binding: FragmentChartBinding? = null
     private val binding get() = _binding!!
 
@@ -46,7 +44,6 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        AndroidSupportInjection.inject(this)
         if (context is FragmentListener) {
             _listener = context
         } else {

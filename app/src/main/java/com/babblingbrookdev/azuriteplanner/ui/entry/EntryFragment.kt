@@ -1,34 +1,25 @@
 package com.babblingbrookdev.azuriteplanner.ui.entry
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.babblingbrookdev.azuriteplanner.R
 import com.babblingbrookdev.azuriteplanner.databinding.FragmentEntryBinding
 import com.babblingbrookdev.azuriteplanner.model.Entry
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class EntryFragment : BottomSheetDialogFragment() {
 
-    @Inject
-    lateinit var viewModel: EntryViewModel
+    private val viewModel: EntryViewModel by viewModels()
     private var _binding: FragmentEntryBinding? = null
     private val binding get() = _binding!!
 
     private var isEditing = false
     private lateinit var editEntry: Entry
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        AndroidSupportInjection.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

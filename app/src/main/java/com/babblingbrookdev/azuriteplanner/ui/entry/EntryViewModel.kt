@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.babblingbrookdev.azuriteplanner.data.Repository
 import com.babblingbrookdev.azuriteplanner.model.Entry
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 
+@HiltViewModel
 class EntryViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     val newEntryId: LiveData<Long> get() = _newEntryId
