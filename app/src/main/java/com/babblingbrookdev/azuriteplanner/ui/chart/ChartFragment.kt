@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.babblingbrookdev.azuriteplanner.R
 import com.babblingbrookdev.azuriteplanner.databinding.FragmentChartBinding
 import com.babblingbrookdev.azuriteplanner.ui.DateFormatter
+import com.babblingbrookdev.azuriteplanner.ui.FragmentListener
 import com.babblingbrookdev.azuriteplanner.ui.YAxisFormatter
 import com.babblingbrookdev.azuriteplanner.ui.entry.EntryFragment
 import com.github.mikephil.charting.components.LimitLine
@@ -21,7 +22,9 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.AndroidSupportInjection
+import java.lang.RuntimeException
 import java.util.*
 import javax.inject.Inject
 import kotlin.math.floor
@@ -34,14 +37,21 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private var _binding: FragmentChartBinding? = null
     private val binding get() = _binding!!
 
+    private var _listener: FragmentListener? = null
+    private val listener get() = _listener!!
+
     companion object {
         private val DAY_UNIT = 86400000L // in millis
     }
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         AndroidSupportInjection.inject(this)
+        if (context is FragmentListener) {
+            _listener = context
+        } else {
+            throw RuntimeException("$context must implement ChartFragmentListener")
+        }
     }
 
     override fun onCreateView(
@@ -57,7 +67,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         super.onViewCreated(view, savedInstanceState)
 
         // show entry fragment on click of floating action button
-        binding.fab.setOnClickListener {
+        listener.getActivityFab().setOnClickListener {
             val entryFragment = EntryFragment()
             entryFragment.show(requireActivity().supportFragmentManager, entryFragment.tag)
         }
@@ -183,6 +193,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _listener = null
         _binding = null
     }
 }

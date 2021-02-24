@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_chart"
         android:icon="@drawable/ic_baseline_chart_24"
+        app:showAsAction="ifRoom"
         android:title="@string/menu_chart" />
     <item
         android:id="@+id/menu_list"
         android:icon="@drawable/ic_baseline_list_24"
+        app:showAsAction="ifRoom"
         android:title="@string/menu_list" />
 
-    <!-- future add
     <item
         android:id="@+id/menu_tools"
         android:icon="@drawable/ic_baseline_tools_24"
-        android:title="@string/menu_tools" /> -->
+        app:showAsAction="ifRoom"
+        android:title="@string/menu_tools" />
 </menu>

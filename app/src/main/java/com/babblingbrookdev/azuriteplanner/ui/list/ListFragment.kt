@@ -14,9 +14,11 @@ import com.babblingbrookdev.azuriteplanner.R
 import com.babblingbrookdev.azuriteplanner.databinding.FragmentEntryBinding
 import com.babblingbrookdev.azuriteplanner.databinding.FragmentListBinding
 import com.babblingbrookdev.azuriteplanner.model.Entry
+import com.babblingbrookdev.azuriteplanner.ui.FragmentListener
 import com.babblingbrookdev.azuriteplanner.ui.entry.EntryFragment
 import dagger.android.support.AndroidSupportInjection
 import java.io.Serializable
+import java.lang.RuntimeException
 
 import javax.inject.Inject
 
@@ -27,6 +29,9 @@ class ListFragment : Fragment(), ListAdapter.OnClickListener {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
+    private var _listener: FragmentListener? = null
+    private val listener get() = _listener!!
+
     private var entryList: List<Entry> = listOf()
 
     private lateinit var listAdapter: ListAdapter
@@ -34,6 +39,11 @@ class ListFragment : Fragment(), ListAdapter.OnClickListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         AndroidSupportInjection.inject(this)
+        if (context is FragmentListener) {
+            _listener = context
+        } else {
+            throw RuntimeException("$context must implement ChartFragmentListener")
+        }
     }
 
     override fun onCreateView(
@@ -48,7 +58,7 @@ class ListFragment : Fragment(), ListAdapter.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fab.setOnClickListener {
+        listener.getActivityFab().setOnClickListener {
             val entryFragment = EntryFragment()
             entryFragment.show(requireActivity().supportFragmentManager, entryFragment.tag)
         }
@@ -79,6 +89,7 @@ class ListFragment : Fragment(), ListAdapter.OnClickListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _listener = null
         _binding = null
     }
 }
