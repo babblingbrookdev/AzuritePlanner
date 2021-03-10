@@ -24,9 +24,9 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.RuntimeException
 import java.util.*
 import kotlin.math.floor
+import kotlin.math.max
 
 @AndroidEntryPoint
 class ChartFragment : Fragment() {
@@ -97,7 +97,12 @@ class ChartFragment : Fragment() {
             fillAlpha = 100
         }
 
-        binding.linechart.setNoDataTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
+        binding.linechart.setNoDataTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.colorPrimaryDark
+            )
+        )
         binding.linechart.invalidate()
 
         // if there is chart data, build a chart
@@ -159,7 +164,15 @@ class ChartFragment : Fragment() {
                 axisRight.isEnabled = false
                 axisLeft.valueFormatter = YAxisFormatter()
                 axisLeft.labelCount = 10
-                axisLeft.axisMaximum = (it.last().azuriteGoal * 1.10f)
+                val maxAzurite =
+                    with(values.maxByOrNull { value -> value.currentAzurite }?.currentAzurite?.toFloat()) {
+                        this ?: 0f
+                    }
+                val maxGoal =
+                    with(values.maxByOrNull { value -> value.azuriteGoal }?.azuriteGoal?.toFloat()) {
+                        this ?: 0f
+                    }
+                axisLeft.axisMaximum = max(maxAzurite, maxGoal)
                 axisLeft.axisMinimum = 0f
 
                 // set chart preferences
@@ -182,6 +195,7 @@ class ChartFragment : Fragment() {
                 // set initial location of chart and viewport size
                 setVisibleXRangeMaximum(DAY_UNIT.toFloat() * 8)
                 setVisibleYRangeMinimum((goal * 1.10f), YAxis.AxisDependency.LEFT)
+                setVisibleYRangeMaximum((goal * 1.10f), YAxis.AxisDependency.LEFT)
                 moveViewToX((System.currentTimeMillis()).toFloat() - (DAY_UNIT * 5))
                 invalidate()
             }
